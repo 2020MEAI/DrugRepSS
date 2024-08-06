@@ -1,0 +1,3 @@
+nohup python -u main.py --method DeepWalk --input 'C:/Users/Administrator/Desktop/DRONet-main/BioNEV/mydata2/graph+dis+drug.edgelist' --output 'C:/Users/Administrator/Desktop/DRONet-main/BioNEV/result/DeepWalk/graph+dis+drug_100_embeddings.txt' >DeepWalk.txt 2>&1
+
+nohup python -u main.py --method LambdaRank --input_train './mydata2/train_1v5.txt' --input_test './mydata2/test_1v5.txt' --output './resultdata/LambRank/example_LambRank_1v5.txt'> test_res.txt 2>&1 &
