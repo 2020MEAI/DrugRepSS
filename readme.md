@@ -29,7 +29,9 @@ We first obtain the textual semantic representations of drugs and diseases throu
 
 ### 4.1.2 Running
 
-- run LLM/chatGPT.py
+```python
+run LLM/chatGPT.py
+```
 
 ### 4.1.3 Output
 
@@ -48,7 +50,7 @@ We first obtain the textual semantic representations of drugs and diseases throu
 - run GIN_Recover model
 
   ```python
-  run embedding/gnnrecoveremb/yModel.py
+  run embedding/gnnrecoveremb/MyModel.py
   ```
 
 - run Pro_G model 
@@ -87,20 +89,20 @@ We first obtain the textual semantic representations of drugs and diseases throu
 - run LambdaRank model
 
   ```python
-  python -u main.py --method LambdaRank --input_train ./mydata2/output训练集magcl.txt --input_test ./mydata2/output测试集magcl.txt --output ./resultdata/LambRank/example_LambRank_1v5.txt
+  python -u main.py --method LambdaRank --input_train ./mydata2/train_dataset.txt --input_test ./mydata2/test_dataset.txt --output ./resultdata/LambRank/example_LambRank_1v5.txt
   LambdaMART
   ```
 
 - run LambdaMART model 
 
   ```python
-  python -u main.py --method LambdaMART --input_train ./mydata2/output训练集gnnrecover.txt --input_test ./mydata2/output测试集gnnrecover.txt --lr_LM 0.001 --output ./resultdata/LambdaMart/example_LambdaMART_1v5.txt
+  python -u main.py --method LambdaMART --input_train ./mydata2/train_dataset.txt --input_test ./mydata2/test_datset.txt --lr_LM 0.001 --output ./resultdata/LambdaMart/example_LambdaMART_1v5.txt
   ```
 
 - run RankNet model
 
   ```python
-  python -u main.py --method RankNet --input_train ./mydata2/output训练集gnnrecover.txt --input_test ./mydata2/output测试集gnnrecover.txt --output ./resultdata/example_rankNet_ran_1v1.txt
+  python -u main.py --method RankNet --input_train ./mydata2/train_dataset.txt --input_test ./mydata2/test_dataset.txt --output ./resultdata/example_rankNet_ran_1v1.txt
   ```
 
 - run PLRank model
