@@ -139,7 +139,7 @@ if __name__ == '__main__':
 
             z = model(fea_init, edge_index, [2, 2], final=True).detach().cpu().numpy()
             df = pd.DataFrame(z)
-            df.to_excel('ouput_features0.3.xlsx', index=False)
+            df.to_excel('ouput_features.xlsx', index=False)
             # z1 = model(x_1, edge_index_1, [2, 2], final=True).detach().cpu().numpy()
             # z2 = model(x_2, edge_index_2, [2, 2], final=True).detach().cpu().numpy()
             #

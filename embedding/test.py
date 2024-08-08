@@ -50,7 +50,7 @@
 # table1_df = pd.read_excel(table1_path)
 #
 # # 读取表格2数据
-# table2_path = 'D:\\yanjiu\\大模型数据集\\图神经网络\\训练集output.xlsx'  # 表格2文件路径
+# table2_path = 'D:\\yanjiu\\DrugRepSS\\embedding\\dataset\\train_origin.xlsx'  # 表格2文件路径
 # table2_df = pd.read_excel(table2_path)
 #
 # # 进行表格匹配
@@ -70,7 +70,7 @@
 # table1_df = pd.read_excel(table1_path)
 #
 # # 读取表格2数据
-# table2_path = 'D:\\yanjiu\\大模型数据集\\图神经网络\\测试集output.xlsx'  # 表格2文件路径
+# table2_path = 'D:\\yanjiu\\DrugRepSS\\embedding\\dataset\\test_origin.xlsx'  # 表格2文件路径
 # table2_df = pd.read_excel(table2_path)
 #
 # # 进行表格匹配
