@@ -1,8 +1,8 @@
-# DrugRepSS: Drug Repositioning Algorithm Based on Graph Neural Network and Ranking Learning
+# DrugRepSS: DrugRepSS: Textual Semantic and Graph Structural Progressive Representation Learning for Drug Repositioning
 
 # 1.Introduction
 
-This repository contains source code and datasets for paper "DrugRepSS: Drug Repositioning Algorithm Based on Graph Neural Network and Ranking Learning".In this study, we propose a drug repositioning framework called DrugRepSS, which leverages the effectiveness comparison relationships (ECR) between drugs to identify new drug indications based on graph neural networks and ranking learning. 
+This repository contains source code and datasets for paper "DrugRepSS: Textual Semantic and Graph Structural Progressive Representation Learning for Drug Repositioning".In this study, we propose a drug repositioning framework called DrugRepSS, which leverages the effectiveness comparison relationships (ECR) between drugs to identify new drug indications based on graph neural networks and ranking learning. 
 
 # 2.Install Python libraries needed
 
