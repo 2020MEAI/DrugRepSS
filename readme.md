@@ -1,4 +1,4 @@
-# DrugRepSS: DrugRepSS: Textual Semantic and Graph Structural Progressive Representation Learning for Drug Repositioning
+# DrugRepSS: Textual Semantic and Graph Structural Progressive Representation Learning for Drug Repositioning
 
 # 1.Introduction
 
