@@ -24,62 +24,63 @@ We first obtain the textual semantic representations of drugs and diseases throu
 
 ### 4.1.1 Dataset
 
-- LLM/dataset/disease_cui_id.xlsx: The names and ids of the disease
-- LLM/dataset/drug_id.xlsx: The names and ids of the drug
+- semantic_feature/dataset/disease_id.xlsx: The names and ids of the disease
+- semantic_feature/dataset/drug_id.xlsx: The names and ids of the drug
 
 ### 4.1.2 Running
 
 ```python
-run LLM/chatGPT.py
+run semantic_feature/chatGPT.py
 ```
 
 ### 4.1.3 Output
 
-- disease_drug_vector.xlsx: Features output by the large language model(The first 263 features are disease features and the rest are drug features)
+- drug_id_vector.xlsx: Drug features output by the large language model
+- disease_id_vector.xlsx: Disease features output by the large language model
 
 ## 4.2 Graph contrastive learning for structural representation 
 
 ### 4.2.1 Dataset
 
-- embedding/dataset/disease_drug_vector.xlsx: Features output by the large language model(The first 263 features are disease features and the rest are drug features)
+- tructural_feature/dataset/disease_drug_vector.xlsx: Features output by the large language model(The first 263 features are disease features and the rest are drug features)
 
-- embedding/dataset/dis_drug_list_new.csv: drug-disease association data 
+- tructural_feature/dataset/dis_drug_list.csv: drug-disease association data 
 
 ### 4.2.2 Running
 
 - run GIN_Recover model
 
   ```python
-  run embedding/gnnrecoveremb/MyModel.py
+  run tructural_feature/gnnrecoveremb/MyModel.py
   ```
 
 - run Pro_G model 
 
   ```python
-  run embedding/ProGemb/NE.py
+  run tructural_feature/ProGemb/NE.py
   ```
 
 - run MA_GCL model
 
   ```python
-  run embedding/MAGCLemb/main.py
+  run tructural_feature/MAGCLemb/main.py
   ```
 
 ### 4.2.3 Output
 
-- ouput _features.xlsx: drug features and disease features output by the GNN
+- output _features.xlsx: drug features and disease features output by the GNN
 
 ## 4.3  Learning to rank for drug repositioning
 
 ### 4.3.1 Dataset
 
-- embedding/dataset/train_origin.xlsx: the training dataset without drug features for LTR model
-- embedding/dataset/test_origin.xlsx: the testing dataset without drug features for LTR model
-- ouput _features.xlsx: drug features and disease features output by the GNN
+- tructural_feature/dataset/train_origin.xlsx: the training dataset without drug features for LTR model
+- tructural_feature/dataset/test_origin.xlsx: the testing dataset without drug features for LTR model
+- output_features.xlsx: drug features and disease features output by the GNN
 
-**We need to go through the following process to generate the dataset for the LTR model（We can refer to the file "embedding/test.py"）:**
+**We need to go through the following process to generate the dataset for the LTR model（We can refer to the file "tructural_feature/handle_file.py"）:**
 
-1. We fill the drug features output by the GNN (ouput _features.xlsx) into the emb column in the train_origin.xlsx and test_origin.xlsx files **(emb column example: "1:feature_value 2:feature_value3:feature_value   ···  100:feature_value")**
+1. We fill the drug features output by the GNN (output _features.xlsx) into the emb column in the train_origin.xlsx and test_origin.xlsx files **(emb column example: "1:feature_value 2:feature_value3:feature_value   ···  100:feature_value")**
 2. We extracted three columns of data from train_origin.xlsx and test_origin.xlsx: disease id, drug effectiveness rank, and drug feature to form the training set and test set. Then we generate the file train_dataset.txt and test_dataset.txt
 
 ### 4.3.2 Running

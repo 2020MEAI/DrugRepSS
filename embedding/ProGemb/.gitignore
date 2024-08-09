@@ -1,8 +1,0 @@
-# Project exclude paths
-/old/
-.idea/*
-.idea/workspace.xml
-__pycache__/data_preprocess.cpython-39.pyc
-*.pyc
-.DS_Store
-
