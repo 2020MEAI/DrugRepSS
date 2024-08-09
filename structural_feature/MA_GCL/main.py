@@ -21,32 +21,13 @@ from pGRACE.dataset import get_dataset,get_rel,get_features
 
 def train():
     model.train()
-    #view_learner.eval()
     optimizer.zero_grad()
-    # data.edge_index:<class 'torch.Tensor'>  torch.Size([2, 10556])
-    # edge_index_1 = dropout_adj(data.edge_index, p=drop_edge_rate_1)[0]
-    # edge_index_2 = dropout_adj(data.edge_index, p=drop_edge_rate_2)[0] #adjacency with edge droprate 2
-
     edge_index_1 = dropout_adj(edge_index, p=drop_edge_rate_1)[0]
     edge_index_2 = dropout_adj(edge_index, p=drop_edge_rate_2)[0]
 
-    # data.x:<class 'torch.Tensor'> torch.Size([2708, 1433])
-    # x_1 = drop_feature(data.x, drop_feature_rate_1)#3
-    # x_2 = drop_feature(data.x, drop_feature_rate_2)#4
-    # 节点特征：CMap特征
-    # x_1 = drop_feature(fea_init, drop_feature_rate_1)#3
-    # x_2 = drop_feature(fea_init, drop_feature_rate_2)#4
     # 节点特征：随机初始化特征
     x_1 = drop_feature(fea_init, drop_feature_rate_1)#3
     x_2 = drop_feature(fea_init, drop_feature_rate_2)#4
-    #cora:3,3,6,3
-    #CS:(1,2)(1,2)(2,3)(2,3)
-    #AP:(3,4)(4,5)(1,2)(2,3)
-    #Citseer(2,3)(3,4)(1,2)(1,2)(2,2)
-    #CiteSeer(4,2)(3,2)
-    #AC:(3,4)(1,4)(0,2)(1,3)
-    #PubMed:(0,3)(1,3)(0,3)(0,2)
-    #k2 = np.random.randint(0, 4)
     z1 = model(x_1, edge_index_1, [2, 2])
     z2 = model(x_2, edge_index_2, [8, 8])
 
@@ -138,14 +119,6 @@ if __name__ == '__main__':
             z = model(fea_init, edge_index, [2, 2], final=True).detach().cpu().numpy()
             df = pd.DataFrame(z)
             df.to_excel('ouput_features.xlsx', index=False)
-            # z1 = model(x_1, edge_index_1, [2, 2], final=True).detach().cpu().numpy()
-            # z2 = model(x_2, edge_index_2, [2, 2], final=True).detach().cpu().numpy()
-            #
-            # if args.fea_type == 'CMap features':
-            #     np.save(args.output_features_file+'node_features/CMap_CL_features/Graph_embeddingfull_fea.npy', z)
-            # elif args.fea_type == 'random features':
-            #     np.save(args.output_features_file + 'node_features/random+CL features/Graph_embeddingfull_fea.npy', z)
-
 
 
 

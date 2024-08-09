@@ -67,7 +67,7 @@ if __name__ == '__main__':
   # 将数据转换为 tensor
   x_tensor = torch.tensor(x_reduced)
 
-  file_path = 'D:\\yanjiu\\DrugRepSS\\tructural_feature\\dataset\\dis_drug_list.csv'  # 请替换为你的实际文件路径
+  file_path = 'D:\\yanjiu\\DrugRepSS\\tructural_feature\\dataset\\dis_drug_list(all).csv'  # 请替换为你的实际文件路径
 
   # 读取表格数据
   edge_index = pd.read_csv(file_path)

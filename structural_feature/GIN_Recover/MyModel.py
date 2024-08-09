@@ -54,8 +54,8 @@ for epoch in range(100):
 
 
 # 读入数据
-feas = pd.read_excel('disease_drug_vector.xlsx')
-edges  = pd.read_excel('drug_dis_id1.xlsx')
+feas = pd.read_excel('D:\\yanjiu\\DrugRepSS\\tructural_feature\\dataset\\disease_drug_vector.xlsx')
+edges  = pd.read_excel('D:\\yanjiu\\DrugRepSS\\tructural_feature\\dataset\\dis_drug_list(only dis_drug).xlsx')
 X = torch.tensor(feas.iloc[:,1:3].values, dtype=torch.float)
 feas = torch.tensor(feas.iloc[:,3:].values, dtype=torch.float)
 X_extended = torch.hstack([X, feas])

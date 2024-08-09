@@ -38,49 +38,51 @@ run semantic_feature/chatGPT.py
 - drug_id_vector.xlsx: Drug features output by the large language model
 - disease_id_vector.xlsx: Disease features output by the large language model
 
-## 4.2 Graph contrastive learning for structural representation 
+## 4.2 Structural representation module
 
 ### 4.2.1 Dataset
 
-- tructural_feature/dataset/disease_drug_vector.xlsx: Features output by the large language model(The first 263 features are disease features and the rest are drug features)
-
-- tructural_feature/dataset/dis_drug_list.csv: drug-disease association data 
+- structural_feature/dataset/disease_drug_vector.xlsx: Features output by the large language model(The first 263 features are disease features and the rest are drug features)
+- structural_feature/dataset/dis_drug_list(all).csv: drug-disease、drug-drug and disease-disease association data 
+- structural_feature/dataset/dis_drug_list(only dis_drug).xlsx:  drug-disease association data 
 
 ### 4.2.2 Running
-
-- run GIN_Recover model
-
-  ```python
-  run tructural_feature/gnnrecoveremb/MyModel.py
-  ```
-
-- run Pro_G model 
-
-  ```python
-  run tructural_feature/ProGemb/NE.py
-  ```
 
 - run MA_GCL model
 
   ```python
-  run tructural_feature/MAGCLemb/main.py
+  run structural_feature/MA_GCL/main.py
+  ```
+
+- run GIN_Recover model
+
+  ```python
+  run structural_feature/GIN_Recover/MyModel.py
+  ```
+
+- run All in one model 
+
+  ```python
+  run structural_feature/All in one/NE.py
   ```
 
 ### 4.2.3 Output
 
-- output _features.xlsx: drug features and disease features output by the GNN
+- structural_feature/MA_GCL/output _features.xlsx: drug features and disease features output by the MA_GCL
+- structural_feature/GIN_Recover/output _features.xlsx: drug features and disease features output by the GIN_Recover
+- structural_feature/All in one/output _features.csv: drug features and disease features output by the All in one
 
 ## 4.3  Learning to rank for drug repositioning
 
 ### 4.3.1 Dataset
 
-- tructural_feature/dataset/train_origin.xlsx: the training dataset without drug features for LTR model
-- tructural_feature/dataset/test_origin.xlsx: the testing dataset without drug features for LTR model
-- output_features.xlsx: drug features and disease features output by the GNN
+- structural_feature/dataset/train_origin.xlsx: the training dataset without drug features for LTR model
+- structural_feature/dataset/test_origin.xlsx: the testing dataset without drug features for LTR model
+- structural_feature/{ModelName}/output_features.xlsx: drug features and disease features output by the GNN
 
-**We need to go through the following process to generate the dataset for the LTR model（We can refer to the file "tructural_feature/handle_file.py"）:**
+**We need to go through the following process to generate the dataset for the LTR model（We can refer to the file "structural_feature/handle_file.py"）:**
 
-1. We fill the drug features output by the GNN (output _features.xlsx) into the emb column in the train_origin.xlsx and test_origin.xlsx files **(emb column example: "1:feature_value 2:feature_value3:feature_value   ···  100:feature_value")**
+1. We fill the drug features output by the GNN (structural_feature/{ModelName}/output _features.xlsx) into the emb column in the train_origin.xlsx and test_origin.xlsx files **(emb column example: "1:feature_value 2:feature_value3:feature_value   ···  100:feature_value")**
 2. We extracted three columns of data from train_origin.xlsx and test_origin.xlsx: disease id, drug effectiveness rank, and drug feature to form the training set and test set. Then we generate the file train_dataset.txt and test_dataset.txt
 
 ### 4.3.2 Running
