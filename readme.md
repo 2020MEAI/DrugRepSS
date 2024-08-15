@@ -24,8 +24,8 @@ We first obtain the textual semantic representations of drugs and diseases throu
 
 ### 4.1.1 Dataset
 
-- semantic_feature/dataset/disease_id.xlsx: The names and ids of the disease
-- semantic_feature/dataset/drug_id.xlsx: The names and ids of the drug
+- semantic_feature/dataset/disease_id.xlsx: The names and IDs of the diseases
+- semantic_feature/dataset/drug_id.xlsx: The names and IDs of the drugs
 
 ### 4.1.2 Running
 
@@ -80,14 +80,14 @@ run semantic_feature/chatGPT.py
 - structural_feature/dataset/test_origin.xlsx: the testing dataset without drug features for LTR model
 - structural_feature/{ModelName}/output_features.xlsx: drug features and disease features output by the GNN
 
-**We need to go through the following process to generate the dataset for the LTR model（We can refer to the file "structural_feature/handle_file.py"）:**
+**We need to go through the following process to generate the dataset for the LTR model（We can refer to the file "structural_feature/handle_file.py" for details）:**
 
-1. We fill the drug features output by the GNN (structural_feature/{ModelName}/output _features.xlsx) into the emb column in the train_origin.xlsx and test_origin.xlsx files **(emb column example: "1:feature_value 2:feature_value3:feature_value   ···  100:feature_value")**
-2. We extracted three columns of data from train_origin.xlsx and test_origin.xlsx: disease id, drug effectiveness rank, and drug feature to form the training set and test set. Then we generate the file train_dataset.txt and test_dataset.txt
+1. We fill the drug features output by the GNN (located in 'structural_feature/{ModelName}/output _features.xlsx') into the 'emb' column in the 'train_origin.xlsx' and 'test_origin.xlsx' files. The 'emb' column should contain a list of feature values, formatted as "1:feature_value 2:feature_value ... 100:feature_value".
+2. We extracted three columns of data from 'train_origin.xlsx' and 'test_origin.xlsx': disease ID, drug effectiveness rank, and drug feature.  These columns are then used to form the training set and test set. Finally, we generate the files 'train_dataset.txt' and 'test_dataset.txt' from the prepared data.
 
 ### 4.3.2 Running
 
-​	You can run LTR models under LTR folder
+​	You can run LTR model under LTR folder
 
 - run LambdaRank model
 
