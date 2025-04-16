@@ -26,25 +26,25 @@ def get_data(file_loc):
         
 def parse_args():
     parser = ArgumentParser(formatter_class=ArgumentDefaultsHelpFormatter,conflict_handler='resolve')
-    parser.add_argument('--input_train', default='./mydata2/output训练集lr0.01.txt',help='A training dataset of learning to rank.')
-    parser.add_argument('--input_test', default='./mydata2/output测试集lr0.01.txt',help='A test dataset of learning to rank.')
-    parser.add_argument('--output',default='./resultdata/LambRank/example_lambdaRank_1v1.txt',help='Output file')
+    parser.add_argument('--input_train', default='./mydata2/train_dataset_magcl.txt',help='A training dataset of learning to rank.')
+    parser.add_argument('--input_test', default='./mydata2/test_dataset_magcl.txt',help='A test dataset of learning to rank.')
+    parser.add_argument('--output',default='./resultdata/LambRank/example_lambdaRank_res.txt',help='Output file')
     parser.add_argument('--method', default='LambdaRank', help='The learning to rank method')
     #LambdaMart
-    parser.add_argument('--number', default=30, type=int, help='The number of regression tree')
+    parser.add_argument('--number', default=50, type=int, help='The number of regression tree')
     parser.add_argument('--lr_LM', default=0.01, type=float, help='learning rate of LambdaMART')
     #LambRank
-    parser.add_argument('--h1_units', default=512, type=int, help='The first hidden layer')
-    parser.add_argument('--h2_units', default=256, type=int, help='The second hidden layer')
+    parser.add_argument('--h1_units', default=256, type=int, help='The first hidden layer')
+    parser.add_argument('--h2_units', default=128, type=int, help='The second hidden layer')
    # parser.add_argument('--h3_units', default=128, type=int, help='The third hidden layer')
    # parser.add_argument('--h4_units', default=64, type=int, help='The forth hidden layer')
-    parser.add_argument('--epochs', default=100, type=int,help='The training epochs of LambdaRank')
-    parser.add_argument('--lr_LR', default=0.001, type=float,help='learning rate of LambdaRank')
+    parser.add_argument('--epochs', default=50, type=int,help='The training epochs of LambdaRank')
+    parser.add_argument('--lr_LR', default=0.0001, type=float,help='learning rate of LambdaRank')
     parser.add_argument('--k', default=10, type=int, help='used to compute the NDCG@k')
     #RankNet
     parser.add_argument("--start_epoch", dest="start_epoch", type=int, default=0)
     parser.add_argument("--additional_epoch", dest="additional_epoch", type=int, default=100)
-    parser.add_argument("--lr_RN", type=float, default=0.0001,help='learning rate of RankNet')
+    parser.add_argument("--lr_RN", type=float, default=0.001,help='learning rate of RankNet')
     parser.add_argument("--optim", dest="optim", type=str, default="adam", choices=["adam", "sgd"])
     parser.add_argument("--leaky_relu", dest="leaky_relu", type=str2bool, nargs="?", const=True, default=False)
     parser.add_argument(
@@ -81,13 +81,34 @@ def main(args):
       average_ndcg, mymetric, predicted_scores = model.validate(test_data, 10)
       print(args.number, average_ndcg, mymetric)
   elif args.method == 'LambdaRank':
+      # n_feature = training_data.shape[1] - 2
+      # model = LambdaRank(training_data, n_feature, args.h1_units, args.h2_units, args.epochs, args.lr_LR)
+      # model.fit()
+      # result=open("./resultdata/LambRank/example_lambdaRank_res.txt", 'w', encoding='utf8')
+      # ndcg, mymetric = model.validate(result, test_data, args.k)
+      # print("*******************testing*******************")
+      # print('Average NDCG : {}'.format(ndcg))
       n_feature = training_data.shape[1] - 2
       model = LambdaRank(training_data, n_feature, args.h1_units, args.h2_units, args.epochs, args.lr_LR)
       model.fit()
-      result=open("./resultdata/LambRank/example_lambdaRank_1v1.txt", 'w', encoding='utf8')
-      ndcg, mymetric = model.validate(result, test_data, args.k)
-      print("*******************testing*******************")
-      print('Average NDCG : {}'.format(ndcg))
+      #
+      output_file = 'top_5_drugs_per_disease.txt'
+      drug_rank_file = 'all_drugs_ranked_per_disease.txt'
+      ndcg_mean, roc_auc, mymetric, overlap_ratio = model.validate(output_file, drug_rank_file, test_data, k=10)
+      # ndcg_mean, roc_auc, mymetric, overlap_ratio = model.validate('output.txt', test_data, k=10)
+      #
+      # print("Average NDCG:", ndcg_mean)
+      # print("ROC AUC:", roc_auc)
+      # print("Metrics:", mymetric)
+      print("Average overlap ratio of top 10 predicted drugs:", overlap_ratio)
+      # ndcg, roc_auc,mymetric = model.validate(args.output, test_data, args.k)
+      # print("*******************testing*******************")
+      # print('Average NDCG : {}'.format(ndcg))
+      # print('ROC AUC : {}'.format(roc_auc))
+      # print('hit@10:', mymetric[0])
+      # print('hit@3:', mymetric[1])
+      # print('hit@1:', mymetric[2])
+      # print('MRR:', mymetric[3])
   elif args.method == 'RankNet':
       train_rank_net(
           args.start_epoch, args.additional_epoch, args.lr_RN, args.optim,

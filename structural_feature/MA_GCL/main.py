@@ -41,11 +41,11 @@ def train():
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--device', type=str, default='cuda')
+    parser.add_argument('--device', type=str, default='cpu')
     parser.add_argument('--config', type=str, default='param.yaml')
     parser.add_argument('--seed', type=int, default=0)
     parser.add_argument('--input_file', type=str, default='./data/input_data.xlsx')
-    parser.add_argument('--fea_type', default='CMap features',choices=['CMap features', 'random features'],type=str)
+    parser.add_argument('--fea_type', default='gml',choices=['gml','luo tuo','biot5 features','biogpt features', 'CMap features', 'random features'],type=str)
     parser.add_argument('--verbose', type=str, default='train,eval,final')
     args = parser.parse_args()
 
@@ -55,25 +55,25 @@ if __name__ == '__main__':
     random.seed(0)
     np.random.seed(args.seed)
     use_nni = args.config == 'nni'
-    learning_rate = config['learning_rate']
+
     # num_hidden = config['num_hidden']
     # num_proj_hidden = config['num_proj_hidden']
-    # learning_rate = 0.0001
+    learning_rate = 0.001
     num_hidden = 100
-    num_proj_hidden = 256
+    num_proj_hidden = 128
     # activation = config['activation']
     activation = 'relu'
     base_model = config['base_model']
     num_layers = config['num_layers']
     dataset = 'Cora'
-    drop_edge_rate_1 = 0.4
-    drop_edge_rate_2 = 0.4
-    drop_feature_rate_1 = 0.4
+    drop_edge_rate_1 = 0.2
+    drop_edge_rate_2 = 0.3
+    drop_feature_rate_1 = 0.3
     drop_feature_rate_2 = 0.4
     drop_scheme = config['drop_scheme']
     tau = config['tau']
     # num_epochs = config['num_epochs']
-    num_epochs = 1000
+    num_epochs = 1500
 
     weight_decay = config['weight_decay']
     rand_layers = config['rand_layers']
@@ -118,7 +118,7 @@ if __name__ == '__main__':
 
             z = model(fea_init, edge_index, [2, 2], final=True).detach().cpu().numpy()
             df = pd.DataFrame(z)
-            df.to_excel('ouput_features.xlsx', index=False)
+            df.to_excel('ouput_features_gml.xlsx', index=False)
 
 
 

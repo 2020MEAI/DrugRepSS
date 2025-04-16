@@ -41,35 +41,6 @@ class MLP(nn.Module):
         return x
 
 
-# class GIN(torch.nn.Module):
-#     def __init__(self, m):
-#         super(GIN, self).__init__()
-#
-#         def init_weights(layer):
-#             if type(layer) == nn.Linear:
-#                 layer.weight.data.normal_(0, 1e-3)
-#
-#         self.mlp1 = MLP(m+2, 128)
-#         self.conv1 = GINConv(self.mlp1)
-#         self.mlp1.main.apply(init_weights)
-#         self.mlp2 = MLP(128, 128)
-#         self.conv2 = GINConv(self.mlp2)
-#         self.mlp2.main.apply(init_weights)
-#         self.mlp3 = MLP(128, 100)
-#         self.conv3 = GINConv(self.mlp3)
-#         self.mlp3.main.apply(init_weights)
-#
-#     def forward(self, data):
-#         x, edge_index = data.x, data.edge_index
-#         x = self.conv1(x, edge_index)
-#         x = F.leaky_relu(x)
-#         x = F.dropout(x, training=self.training)
-#         x = self.conv2(x, edge_index)
-#         x = F.leaky_relu(x)
-#         x = F.dropout(x, training=self.training)
-#         x = self.conv3(x, edge_index)
-#         return x
-
 class GIN(torch.nn.Module):
     def __init__(self, m):
         super(GIN, self).__init__()

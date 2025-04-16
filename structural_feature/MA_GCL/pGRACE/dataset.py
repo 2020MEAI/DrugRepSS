@@ -57,9 +57,69 @@ def get_features(fea_type,input_file):
             fin_dis_drug_fea_init.append(one_dis_drug_fea_init)
         feature = torch.Tensor(fin_dis_drug_fea_init)
 
+    if fea_type == 'biogpt features':
+        df_dis_drug = pd.read_excel(input_file, sheet_name='biogpt_vec')
+        dis_drug_fea = [i[1: -1].split(', ') for i in list(df_dis_drug['Gene_vect'])]
+        dis_drug_fea_init = []
+        for dr in dis_drug_fea:
+            dis_drug_fea_init.append(list(map(float, dr)))
+
+        fin_dis_drug_fea_init = []
+        for dis_drug_fea_init_list in dis_drug_fea_init:
+            one_dis_drug_fea_init = []
+            for dis_drug_fea in dis_drug_fea_init_list:
+                one_dis_drug_fea_init.append(dis_drug_fea * 0.01)
+            fin_dis_drug_fea_init.append(one_dis_drug_fea_init)
+        feature = torch.Tensor(fin_dis_drug_fea_init)
+
+    if fea_type == 'gml':
+        df_dis_drug = pd.read_excel(input_file, sheet_name='gml_vec')
+        dis_drug_fea = [i[1: -1].split(', ') for i in list(df_dis_drug['Gene_vect'])]
+        dis_drug_fea_init = []
+        for dr in dis_drug_fea:
+            dis_drug_fea_init.append(list(map(float, dr)))
+
+        fin_dis_drug_fea_init = []
+        for dis_drug_fea_init_list in dis_drug_fea_init:
+            one_dis_drug_fea_init = []
+            for dis_drug_fea in dis_drug_fea_init_list:
+                one_dis_drug_fea_init.append(dis_drug_fea * 0.01)
+            fin_dis_drug_fea_init.append(one_dis_drug_fea_init)
+        feature = torch.Tensor(fin_dis_drug_fea_init)
+
+    if fea_type == 'biot5 features':
+        df_dis_drug = pd.read_excel(input_file, sheet_name='biot5_vec')
+        dis_drug_fea = [i[1: -1].split(', ') for i in list(df_dis_drug['Gene_vect'])]
+        dis_drug_fea_init = []
+        for dr in dis_drug_fea:
+            dis_drug_fea_init.append(list(map(float, dr)))
+
+        fin_dis_drug_fea_init = []
+        for dis_drug_fea_init_list in dis_drug_fea_init:
+            one_dis_drug_fea_init = []
+            for dis_drug_fea in dis_drug_fea_init_list:
+                one_dis_drug_fea_init.append(dis_drug_fea * 0.01)
+            fin_dis_drug_fea_init.append(one_dis_drug_fea_init)
+        feature = torch.Tensor(fin_dis_drug_fea_init)
+
+    if fea_type == 'luo tuo':
+        df_dis_drug = pd.read_excel(input_file, sheet_name='luotuo_vec')
+        dis_drug_fea = [i[1: -1].split(', ') for i in list(df_dis_drug['Gene_vect'])]
+        dis_drug_fea_init = []
+        for dr in dis_drug_fea:
+            dis_drug_fea_init.append(list(map(float, dr)))
+
+        fin_dis_drug_fea_init = []
+        for dis_drug_fea_init_list in dis_drug_fea_init:
+            one_dis_drug_fea_init = []
+            for dis_drug_fea in dis_drug_fea_init_list:
+                one_dis_drug_fea_init.append(dis_drug_fea * 0.01)
+            fin_dis_drug_fea_init.append(one_dis_drug_fea_init)
+        feature = torch.Tensor(fin_dis_drug_fea_init)
+
 
     elif fea_type == 'random features':
-        feature = torch.normal(0, 0.1, size=(625, 978))
+        feature = torch.normal(0, 0.1, size=(896, 978))
 
     else:
         print(f"Warning: Unsupported feature type '{fea_type}'. Returning default value.")
@@ -69,7 +129,7 @@ def get_features(fea_type,input_file):
 
 
 def get_rel(input_file):
-    df_dis_drug = pd.read_excel(input_file,sheet_name='dis_drug_rel')
+    df_dis_drug = pd.read_excel(input_file,sheet_name='dis_drug_train')
     dis_list = df_dis_drug['dis_ID'].to_list()
     drug_list = df_dis_drug['drug_ID'].to_list()
     edge_index_list = [dis_list,drug_list]

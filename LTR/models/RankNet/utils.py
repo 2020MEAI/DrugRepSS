@@ -56,7 +56,7 @@ def load_train_vali_data(data_fold, small_dataset=False):
     if small_dataset:
         train_file, valid_file = "./mydata/train_1v1.txt", "./mydata/test_1v5.txt"
     else:
-        train_file, valid_file = "./mydata2/output训练集0.4.txt", "./mydata2/output测试集0.4.txt"
+        train_file, valid_file = "./mydata2/train_dataset_gml.txt", "./mydata2/test_dataset_gml.txt"
 
     data_dir = ''
     # train_data = os.path.join(os.path.dirname(__file__), data_dir, data_fold, train_file)

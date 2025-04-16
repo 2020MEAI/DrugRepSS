@@ -15,7 +15,7 @@ def get_data(file_loc):#读取文件（input）
         q_id = arr[1].split(':')[1]## 获取查询ID（q_id），按冒号分割并取第二部分
         new_arr.append(int(score))
         new_arr.append(int(q_id))
-        arr = arr[2:77]#取剩余的部分作为特征值，范围为索引2到101
+        arr = arr[2:100]#取剩余的部分作为特征值，范围为索引2到101
         for el in arr:
             new_arr.append(float(el.split(':')[1]))
         data.append(new_arr)
@@ -48,7 +48,7 @@ def extract_numbers_by_id(file_path, target_id):
     return numbers_list
 
 if __name__ == '__main__':
-    test_data = 'D:\\yanjiu\\DrugRepSS\\LTR\\mydata2\\output测试集gnnrecover.txt'
+    test_data = 'D:\\yanjiu\\DrugRepSS\\LTR\\mydata2\\test_dataset_magcl.txt'
     test_data = get_data(test_data)
 
     qid_doc_map = group_by(test_data, 1)

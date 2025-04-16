@@ -1,3 +1,24 @@
+Amazon-Photo:
+   learning_rate: 0.001
+   num_hidden: 128
+   num_proj_hidden: 128
+   activation: "relu"
+   base_model: 'NewGRACE'
+   num_layers: 2
+   drop_embedding: 0.10
+   drop_edge_rate_1: 0.3
+   drop_edge_rate_2: 0.4
+   drop_feature_rate_1: 0.2
+   drop_feature_rate_2: 0.3
+   tau: 0.3
+   k_layers: 4
+   k_neighbors: 2
+   num_epochs: 1500
+   weight_decay: 0.000000
+   drop_scheme: 'degree'
+   rand_layers: 4
+
+
 WikiCS:
   learning_rate: 0.01
   num_hidden: 256
@@ -23,10 +44,10 @@ Cora:
   base_model: 'GCNConv'
   num_layers: 2
   drop_embedding: 0.4
-  drop_edge_rate_1: 0.4
-  drop_edge_rate_2: 0.4
-  drop_feature_rate_1: 0.5
-  drop_feature_rate_2: 0.5
+  drop_edge_rate_1 : 0.3
+  drop_edge_rate_2 : 0.4
+  drop_feature_rate_1 : 0.2
+  drop_feature_rate_2 : 0.3
   tau: 0.4
   num_epochs: 500
   weight_decay: 0.00001
@@ -148,25 +169,9 @@ Amazon-Computers:
    weight_decay: 0.00001
    drop_scheme: 'degree'
    rand_layers: 2
-Amazon-Photo:
-   learning_rate: 0.001
-   num_hidden: 256
-   num_proj_hidden: 256
-   activation: "prelu"
-   base_model: 'GCNConv'
-   num_layers: 2
-   drop_embedding: 0.10
-   drop_edge_rate_1: 0.3
-   drop_edge_rate_2: 0.4
-   drop_feature_rate_1: 0.2
-   drop_feature_rate_2: 0.3
-   tau: 0.3
-   k_layers: 4
-   k_neighbors: 2
-   num_epochs: 1500
-   weight_decay: 0.000000
-   drop_scheme: 'degree'
-   rand_layers: 4
+
+
+
 Coauthor-CS1:
    learning_rate: 0.0005
    num_hidden: 256
