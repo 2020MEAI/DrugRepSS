@@ -6,7 +6,7 @@ This repository contains the source code and datasets for the paper **"DeepRepur
 
 # 2. Overview
 
-![image](.\framework_img.png)
+![image](./framework_img.png)
 
 DeepRepurpose consists of three key modules: 
 
